@@ -1,3 +1,4 @@
+import { SettingOutlined } from "@ant-design/icons";
 import { PageOptions } from "@src/api/heroEndpoint";
 import HeroAttribute from "@src/components/HeroAttribute";
 import HeroLevelCell from "@src/components/HeroLevelCell";
@@ -154,6 +155,9 @@ function HeroList() {
             <Button type="primary">Add Heroes</Button>
           </Link>
         )}
+        <Link to={'heroes/setting'}>
+          <SettingOutlined />
+        </Link>
       </header>
 
       <Table
