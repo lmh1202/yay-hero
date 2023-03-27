@@ -156,7 +156,9 @@ function HeroList() {
           </Link>
         )}
         <Link to={'heroes/setting'}>
-          <SettingOutlined />
+          <Button type="primary" shape="circle" style={{ background: 'white' }}>
+            <SettingOutlined style={{ color: 'black' }} />
+          </Button>
         </Link>
       </header>
 
