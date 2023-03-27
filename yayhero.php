@@ -30,6 +30,10 @@ if (!wp_installing()) {
             include YAY_HERO_PLUGIN_PATH . 'includes/pages/hero-admin.php';
             include YAY_HERO_PLUGIN_PATH . 'includes/enqueue/hero-app.php';
             include YAY_HERO_PLUGIN_PATH . 'includes/api/hero-api.php';
+
+            include YAY_HERO_PLUGIN_PATH . 'includes/classes/hero-class-enum.php';
+            include YAY_HERO_PLUGIN_PATH . 'includes/classes/hero-attribute-enum.php';
+            include YAY_HERO_PLUGIN_PATH . 'includes/classes/hero-settings.php';
         }
     );
 

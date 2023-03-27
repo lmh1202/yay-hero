@@ -36,6 +36,8 @@ function yayhero_register_entry()
         ]
 
     ]);
+    //TODO localize script
+    // yay_hero_settings();
 }
 
 function yayhero_register_preload_modules()

@@ -9,7 +9,7 @@ import {
   patchHero,
   postHero,
 } from "@src/api/heroEndpoint";
-import { yayHeroData } from "../localize";
+import { Settings, yayHeroData } from "../localize";
 import { Hero, HeroModel } from "../types/heroes.type";
 
 interface HeroState {
@@ -32,6 +32,15 @@ interface HeroState {
   heroRevalidateEditModel: (id: number) => Promise<void>;
   heroSubmitEdit: (id: number, payload: Hero) => Promise<number>;
   heroDelete: (id: number) => Promise<boolean>;
+
+  // TODO: settings
+  // settings: Settings
+  // settingsUpdateDefaultValues(
+  //   defaultValues: Settings["defaultValues"]
+  // ): Promise<void>;
+  // settingsUpdateLevelUpAttributes(
+  //   levelUpAttributes: Settings["levelUpAttributes"]
+  // ): Promise<void>;
 }
 
 export const useHeroStore = create<

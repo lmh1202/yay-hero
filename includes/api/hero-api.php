@@ -80,6 +80,22 @@ add_action('rest_api_init', function () {
             ]
         ]
     );
+
+    register_rest_route('yayhero/v1', '/settings/default-values', [
+        [
+            'methods' => 'POST',
+            'callback' => 'yay_hero_update_default_values',
+            'permission_callback' => 'yayhero_has_api_write_permission'
+        ]
+    ]);
+
+    register_rest_route('yayhero/v1', '/settings/level-up-attributes', [
+        [
+            'methods' => 'POST',
+            'callback' => 'yay_hero_update_level_up_attributes',
+            'permission_callback' => 'yayhero_has_api_write_permission'
+        ]
+    ]);
 });
 
 function get_hero_from_post(WP_Post $post)
@@ -283,4 +299,13 @@ function level_up($hero)
         default:
             break;
     }
+}
+
+function yay_hero_update_default_values(WP_REST_Request $request) {
+    //TODO
+    // yay_hero_settings();
+}
+
+function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
+    //TODO
 }
