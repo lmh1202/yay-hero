@@ -45,9 +45,16 @@ function SettingsPage() {
                 Back
             </Button>
 
-            <Collapse>
+            <Collapse activeKey={1}>
                 <Panel header={"Default Hero"} key={"1"} extra={genExtra()}>
-                    <div>{"This is text"}</div>
+                    <div>
+                        <div>
+                            <span id="yay_hero_name">Name: {window.yayHeroSettings.defaultValues.name}</span>
+                        </div>
+                        <div>
+                            <span id="yay_hero_level">Level: {window.yayHeroSettings.defaultValues.level}</span>
+                        </div>
+                    </div>
                 </Panel>
             </Collapse>
 
