@@ -26,7 +26,7 @@ export function postHero(payload: Hero): Promise<number> {
     .json();
 }
 
-export async function postSetting(url = '', data: any) {
+export async function savePostSetting(url = '', data: any) {
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",

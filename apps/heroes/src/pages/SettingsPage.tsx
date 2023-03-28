@@ -1,11 +1,15 @@
 import { SettingOutlined } from "@ant-design/icons"
-import { postSetting } from "@src/api/heroEndpoint"
-import { Button, Col, Collapse, Form, Input, Modal } from "antd"
+import { savePostSetting } from "@src/api/heroEndpoint"
+import { Button, Collapse, Form, Input, Modal } from "antd"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { text } from "stream/consumers"
 
 function SettingsPage() {
+    const DEFAULT_VALUE = {
+        name: window.yayHeroSettings.defaultValues.name,
+        level: window.yayHeroSettings.defaultValues.level,
+    };
+
     const navigate = useNavigate()
 
     const { Panel } = Collapse
@@ -20,22 +24,19 @@ function SettingsPage() {
         />
     )
 
-    const handleOk = () => {
-        setIsModalOpen(false)
-    }
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const handleCancel = () => {
-        setIsModalOpen(false)
+        setIsModalOpen(false);
     }
-
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const onFinish = (value: any) => {
         try {
-            postSetting(window.yayHeroSettings.restUrl + 'yayhero/v1/settings/default-values', { value }).then((result) => console.log(result))
+            savePostSetting(window.yayHeroSettings.restUrl + 'yayhero/v1/settings/default-values', { value }).then((result) => console.log(result))
         } catch (error) {
             console.log(error)
         }
+        setIsModalOpen(false)
     }
 
     return (
@@ -61,31 +62,32 @@ function SettingsPage() {
             <Modal
                 title="Settings"
                 open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
                 okText={'Save'}
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{ style: { display: 'none' } }}
+                onCancel={handleCancel}
             >
                 <Form
                     labelCol={{ span: 3 }}
                     wrapperCol={{ span: 20 }}
+                    initialValues={DEFAULT_VALUE}
                     labelAlign='right'
                     onFinish={onFinish}
+
                 >
                     <Form.Item
                         label={'Name'}
                         name={'name'}
                     >
-                        <Input defaultValue={window.yayHeroSettings.defaultValues.name} />
+                        <Input />
                     </Form.Item>
                     <Form.Item
                         label={'Level'}
                         name={'level'}
                     >
-                        <Input defaultValue={window.yayHeroSettings.defaultValues.level} />
+                        <Input />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 10, span: 16 }} style={{ marginBottom: 0 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>

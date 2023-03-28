@@ -9,9 +9,9 @@ import useMutationHeroAdd from "@src/hooks/useMutationHeroAdd";
 import { yayHeroData } from "@src/localize";
 
 const DEFAULT_VALUE: Hero = {
-  name: "default",
+  name: window.yayHeroSettings.defaultValues.name,
   class: "Mage",
-  level: 1,
+  level: window.yayHeroSettings.defaultValues.level,
   attributes: {
     strength: 10,
     dexterity: 10,
