@@ -27,7 +27,7 @@ class YayHeroSettings {
             YayHeroAttributeEnum::INTELLIGENCE => 0,
             YayHeroAttributeEnum::VITALITY => 1
         ],
-        //TODO
+        // TODO
          YayHeroClassEnum::PALADIN => [
             YayHeroAttributeEnum::STRENGTH => 1,
             YayHeroAttributeEnum::DEXTERITY => 0,
@@ -60,18 +60,19 @@ class YayHeroSettings {
     }
 
     public function set_default_values($data) {
-        //TODOself::DEFAULT_VALUES
+        //TODO
         update_option('yayHeroDefaultValues', $data);
     }
 
     public function get_level_up_attributes() {
         //TODO
-        return get_option('yayHeroesAttributes');
+        // return get_option('yayHeroLevelUpAttributes');
+        return self::DEFAULT_LEVEL_UP_ATTRIBUTES;
     }
 
     public function set_level_up_attributes() {
         //TODO
-        update_option('yayHeroesAttributes', self::DEFAULT_LEVEL_UP_ATTRIBUTES);
+        update_option('yayHeroLevelUpAttributes', self::DEFAULT_LEVEL_UP_ATTRIBUTES);
     }
 }
 

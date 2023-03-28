@@ -1,4 +1,5 @@
 import { SettingOutlined } from "@ant-design/icons"
+import { yayHeroSettings } from "@src/localize"
 import { useHeroStore } from "@src/store/heroStore"
 import { Collapse } from "antd"
 
@@ -7,7 +8,7 @@ function DefaultValuesCollapse() {
 
     const { Panel } = Collapse
 
-    const genExtra = () => (
+    const settingButton = () => (
         <SettingOutlined
             style={{ fontSize: 18 }}
             onClick={(event) => {
@@ -17,20 +18,20 @@ function DefaultValuesCollapse() {
         />
     )
 
-    return <>
-        <Collapse activeKey={1}>
-            <Panel header={"Default Hero"} key={"1"} extra={genExtra()}>
+    return <div>
+        <Collapse activeKey={1} style={{ marginTop: 20 }}>
+            <Panel header={"Default Hero"} key={"1"} extra={settingButton()}>
                 <div>
                     <div>
-                        <span id="yay_hero_name">Name: {window.yayHeroSettings.defaultValues.name}</span>
+                        <span id="yay_hero_name">Name: {yayHeroSettings.defaultValues.name}</span>
                     </div>
                     <div>
-                        <span id="yay_hero_level">Level: {window.yayHeroSettings.defaultValues.level}</span>
+                        <span id="yay_hero_level">Level: {yayHeroSettings.defaultValues.level}</span>
                     </div>
                 </div>
             </Panel>
         </Collapse>
-    </>
+    </div>
 }
 
 export default DefaultValuesCollapse

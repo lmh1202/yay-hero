@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import HeroFormContent from "../components/HeroFormContent";
 
 import useMutationHeroAdd from "@src/hooks/useMutationHeroAdd";
-import { yayHeroData } from "@src/localize";
+import { yayHeroData, yayHeroSettings } from "@src/localize";
 
 const DEFAULT_VALUE: Hero = {
-  name: window.yayHeroSettings.defaultValues.name,
+  name: yayHeroSettings.defaultValues.name,
   class: "Mage",
-  level: window.yayHeroSettings.defaultValues.level,
+  level: yayHeroSettings.defaultValues.level,
   attributes: {
     strength: 10,
     dexterity: 10,
