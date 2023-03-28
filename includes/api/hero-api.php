@@ -304,6 +304,10 @@ function level_up($hero)
 function yay_hero_update_default_values(WP_REST_Request $request) {
     //TODO
     // yay_hero_settings();
+    $data = $request->get_param('value');
+    $yay_hero_settings = yay_hero_settings();
+    $yay_hero_settings->set_default_values($data);
+    return $data;
 }
 
 function yay_hero_update_level_up_attributes(WP_REST_Request $request) {

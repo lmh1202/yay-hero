@@ -16,7 +16,8 @@ class YayHeroSettings {
     }
 
     const DEFAULT_VALUES = [
-        //TODO
+        'name'=> 'Omen',
+        'level'=> 1
     ];
 
     const DEFAULT_LEVEL_UP_ATTRIBUTES = [
@@ -27,24 +28,50 @@ class YayHeroSettings {
             YayHeroAttributeEnum::VITALITY => 1
         ],
         //TODO
+         YayHeroClassEnum::PALADIN => [
+            YayHeroAttributeEnum::STRENGTH => 1,
+            YayHeroAttributeEnum::DEXTERITY => 0,
+            YayHeroAttributeEnum::INTELLIGENCE => 0,
+            YayHeroAttributeEnum::VITALITY => 1
+        ],
+         YayHeroClassEnum::MAGE => [
+            YayHeroAttributeEnum::STRENGTH => 1,
+            YayHeroAttributeEnum::DEXTERITY => 0,
+            YayHeroAttributeEnum::INTELLIGENCE => 0,
+            YayHeroAttributeEnum::VITALITY => 1
+        ],
+         YayHeroClassEnum::ROUGE => [
+            YayHeroAttributeEnum::STRENGTH => 1,
+            YayHeroAttributeEnum::DEXTERITY => 0,
+            YayHeroAttributeEnum::INTELLIGENCE => 0,
+            YayHeroAttributeEnum::VITALITY => 1
+        ],
+         YayHeroClassEnum::SHAMAN => [
+            YayHeroAttributeEnum::STRENGTH => 1,
+            YayHeroAttributeEnum::DEXTERITY => 0,
+            YayHeroAttributeEnum::INTELLIGENCE => 0,
+            YayHeroAttributeEnum::VITALITY => 1
+        ],
     ];
     
     public function get_default_values() {
         //TODO
-        return self::DEFAULT_VALUES;
+        return get_option('yayHeroDefaultValues');
     }
 
-    public function set_default_values() {
-        //TODO
+    public function set_default_values($data) {
+        //TODOself::DEFAULT_VALUES
+        update_option('yayHeroDefaultValues', $data);
     }
 
     public function get_level_up_attributes() {
         //TODO
-        return self::DEFAULT_LEVEL_UP_ATTRIBUTES;
+        return get_option('yayHeroesAttributes');
     }
 
     public function set_level_up_attributes() {
         //TODO
+        update_option('yayHeroesAttributes', self::DEFAULT_LEVEL_UP_ATTRIBUTES);
     }
 }
 

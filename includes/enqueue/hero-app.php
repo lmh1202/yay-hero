@@ -33,11 +33,18 @@ function yayhero_register_entry()
         'auth' => [
             'canWrite' => current_user_can('manage_options'),
             'canRead' => current_user_can('read')
-        ]
-
+        ],
     ]);
+
     //TODO localize script
     // yay_hero_settings();
+    $yay_hero_settings = yay_hero_settings();
+    wp_localize_script("module/yayhero/main.tsx", "yayHeroSettings", [
+        'restUrl' => esc_url_raw(rest_url()),
+        'restNonce' => wp_create_nonce('wp_rest'),
+        'defaultValues' => $yay_hero_settings->get_default_values(),
+        'levelUpAttributes' => $yay_hero_settings->get_level_up_attributes(),
+    ]);
 }
 
 function yayhero_register_preload_modules()

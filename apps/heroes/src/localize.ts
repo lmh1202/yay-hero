@@ -12,12 +12,15 @@ export type Data = {
 };
 
 export type Settings = {
+  restUrl: string;
+  restNonce: string;
   defaultValues: {
     name: string;
     level: number;
   }
   levelUpAttributes: Record<HeroClass, HeroAttributes>;
 }
+
 
 export const yayHeroData = (window as any).yayHeroData as Data;
 export const yayHeroSettings = (window as any).yayHeroSettings as Settings;

@@ -26,6 +26,23 @@ export function postHero(payload: Hero): Promise<number> {
     .json();
 }
 
+export async function postSetting(url = '', data: any) {
+  const response = await fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      "X-WP-Nonce": window.yayHeroSettings.restNonce,
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data),
+  })
+  return await response.json();
+}
+
 export function patchHero(heroId: number, payload: Hero): Promise<any> {
   return wpEndpoint
     .patch(`heroes/${heroId}`, {
