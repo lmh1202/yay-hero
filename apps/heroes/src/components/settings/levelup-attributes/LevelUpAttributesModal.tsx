@@ -1,6 +1,6 @@
 import { yayHeroSettings } from "@src/localize"
 import { useHeroStore } from "@src/store/heroStore"
-import { Button, Form, Input, Modal } from "antd"
+import { Button, Divider, Form, Input, Modal } from "antd"
 
 function LevelUpAttributesModal() {
     const isModalOpen = useHeroStore((state) => state.isModalOpen)
@@ -25,36 +25,39 @@ function LevelUpAttributesModal() {
         },
         {
             name: 'Mage',
-            attributes: ['Strength', 'Dexterity', 'Intelligence', 'Vitality'],
+            attributes: ['strength', 'dexterity', 'intelligence', 'vitality'],
             data: heroes.Mage,
         },
         {
             name: 'Paladin',
-            attributes: ['Strength', 'Dexterity', 'Intelligence', 'Vitality'],
+            attributes: ['strength', 'dexterity', 'intelligence', 'vitality'],
             data: heroes.Paladin,
         },
         {
             name: 'Shaman',
-            attributes: ['Strength', 'Dexterity', 'Intelligence', 'Vitality'],
+            attributes: ['strength', 'dexterity', 'intelligence', 'vitality'],
             data: heroes.Shaman,
         },
         {
             name: 'Rogue',
-            attributes: ['Strength', 'Dexterity', 'Intelligence', 'Vitality'],
+            attributes: ['strength', 'dexterity', 'intelligence', 'vitality'],
             data: heroes.Rogue,
         },
     ];
 
-    console.log(heroes)
-
     const renderClassInputs = (inputsData: any) => {
         return inputsData.map((inputData: any) => (
-            <Form.Item>
+            <Form.Item style={{ marginBottom: -20 }}>
                 <h4>{inputData.name}</h4>
                 {inputData.attributes.map((attribute: any) => (
-                    <Input key={attribute} prefix={attribute} value={""} />
+                    <>
+                        <h5 style={{ marginBottom: 5, textTransform: 'capitalize' }}>{attribute}</h5>
+                        <Input key={attribute} value={inputData.data[attribute]} />
+                    </>
                 ))}
+                <Divider></Divider>
             </Form.Item>
+
         ))
     }
 
@@ -68,7 +71,7 @@ function LevelUpAttributesModal() {
         >
             <Form
                 labelCol={{ span: 3 }}
-                wrapperCol={{ span: 20 }}
+                wrapperCol={{ span: 25 }}
                 labelAlign='right'
                 onFinish={onFinish}
             >

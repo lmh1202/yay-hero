@@ -30,14 +30,14 @@ class YayHeroSettings {
         // TODO
          YayHeroClassEnum::PALADIN => [
             YayHeroAttributeEnum::STRENGTH => 1,
-            YayHeroAttributeEnum::DEXTERITY => 0,
+            YayHeroAttributeEnum::DEXTERITY => 300,
             YayHeroAttributeEnum::INTELLIGENCE => 0,
             YayHeroAttributeEnum::VITALITY => 1
         ],
          YayHeroClassEnum::MAGE => [
             YayHeroAttributeEnum::STRENGTH => 1,
             YayHeroAttributeEnum::DEXTERITY => 0,
-            YayHeroAttributeEnum::INTELLIGENCE => 0,
+            YayHeroAttributeEnum::INTELLIGENCE => 200,
             YayHeroAttributeEnum::VITALITY => 1
         ],
          YayHeroClassEnum::ROUGE => [
