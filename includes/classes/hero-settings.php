@@ -61,18 +61,27 @@ class YayHeroSettings {
 
     public function set_default_values($data) {
         //TODO
+        if(!$data){
+            return;
+        }
         update_option('yayHeroDefaultValues', $data);
     }
 
     public function get_level_up_attributes() {
         //TODO
-        // return get_option('yayHeroLevelUpAttributes');
-        return self::DEFAULT_LEVEL_UP_ATTRIBUTES;
+        $data = get_option('yayHeroLevelUpAttributes');
+        if(is_array($data) && empty($data)){
+            return self::DEFAULT_LEVEL_UP_ATTRIBUTES;
+        }
+        return $data;
     }
 
-    public function set_level_up_attributes() {
+    public function set_level_up_attributes($data) {
         //TODO
-        update_option('yayHeroLevelUpAttributes', self::DEFAULT_LEVEL_UP_ATTRIBUTES);
+        if(!$data){
+            return;
+        }
+        update_option('yayHeroLevelUpAttributes', $data);
     }
 }
 

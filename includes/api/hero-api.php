@@ -260,40 +260,44 @@ function level_up($hero)
 {
     $hero_class = $hero['class'];
 
+    $yay_hero_settings = yay_hero_settings();
+    
+    $level_up_attributes = $yay_hero_settings->get_level_up_attributes();
+
     switch ($hero_class) {
         case 'Warrior':
-            $hero['attributes']->strength += 8;
-            $hero['attributes']->vitality += 5;
-            $hero['attributes']->dexterity += 2;
-            $hero['attributes']->intelligence += 1;
+            $hero['attributes']->strength += $level_up_attributes['Warrior']['strength'];
+            $hero['attributes']->vitality += $level_up_attributes['Warrior']['vitality'];
+            $hero['attributes']->dexterity += $level_up_attributes['Warrior']['dexterity'];
+            $hero['attributes']->intelligence += $level_up_attributes['Warrior']['intelligence'];
             break;
 
         case 'Paladin':
-            $hero['attributes']->strength += 6;
-            $hero['attributes']->vitality += 6;
-            $hero['attributes']->dexterity += 3;
-            $hero['attributes']->intelligence += 3;
+            $hero['attributes']->strength += $level_up_attributes['Paladin']['strength'];
+            $hero['attributes']->vitality += $level_up_attributes['Paladin']['vitality'];
+            $hero['attributes']->dexterity += $level_up_attributes['Paladin']['dexterity'];
+            $hero['attributes']->intelligence += $level_up_attributes['Paladin']['intelligence'];
             break;
 
         case 'Mage':
-            $hero['attributes']->strength += 3;
-            $hero['attributes']->vitality += 3;
-            $hero['attributes']->dexterity += 2;
-            $hero['attributes']->intelligence += 10;
+            $hero['attributes']->strength += $level_up_attributes['Mage']['strength'];
+            $hero['attributes']->vitality += $level_up_attributes['Mage']['vitality'];
+            $hero['attributes']->dexterity += $level_up_attributes['Mage']['dexterity'];
+            $hero['attributes']->intelligence += $level_up_attributes['Mage']['intelligence'];
             break;
 
         case 'Rogue':
-            $hero['attributes']->strength += 4;
-            $hero['attributes']->vitality += 4;
-            $hero['attributes']->dexterity += 8;
-            $hero['attributes']->intelligence += 4;
+            $hero['attributes']->strength += $level_up_attributes['Rogue']['strength'];
+            $hero['attributes']->vitality += $level_up_attributes['Rogue']['vitality'];
+            $hero['attributes']->dexterity += $level_up_attributes['Rogue']['dexterity'];
+            $hero['attributes']->intelligence += $level_up_attributes['Rogue']['intelligence'];
             break;
 
         case 'Shaman':
-            $hero['attributes']->strength += 3;
-            $hero['attributes']->vitality += 3;
-            $hero['attributes']->dexterity += 6;
-            $hero['attributes']->intelligence += 7;
+            $hero['attributes']->strength += $level_up_attributes['Shaman']['strength'];
+            $hero['attributes']->vitality += $level_up_attributes['Shaman']['vitality'];
+            $hero['attributes']->dexterity += $level_up_attributes['Shaman']['dexterity'];
+            $hero['attributes']->intelligence += $level_up_attributes['Shaman']['intelligence'];
             break;
 
         default:
@@ -328,4 +332,19 @@ function yay_hero_update_default_values(WP_REST_Request $request) {
 
 function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
     //TODO
+    $data='';
+
+    if ($request->get_param('heroesAttributes')){
+        $data = $request->get_param('heroesAttributes');
+    }
+
+    if(!$data){
+        $data = 'Server do not get data from request';
+        return $data;
+    }
+
+    $yay_hero_settings = yay_hero_settings();
+    $yay_hero_settings->set_level_up_attributes($data);
+
+    return $data;
 }

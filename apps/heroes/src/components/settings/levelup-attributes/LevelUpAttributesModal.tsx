@@ -1,21 +1,64 @@
+import { savePostSetting } from "@src/api/heroEndpoint"
 import { yayHeroSettings } from "@src/localize"
 import { useHeroStore } from "@src/store/heroStore"
 import { Button, Divider, Form, Input, Modal } from "antd"
+import { useState } from "react"
 
 function LevelUpAttributesModal() {
-    const isModalOpen = useHeroStore((state) => state.isModalOpen)
+    const isModal2Open = useHeroStore((state) => state.isModal2Open)
 
-    const setIsModalOpen = useHeroStore((state) => state.setIsModalOpen)
+    const setIsModal2Open = useHeroStore((state) => state.setIsModal2Open)
+
+    const [defaulvalue, setDefaultValue] = useState({})
 
     const handleCancel = () => {
-        setIsModalOpen(false)
+        setIsModal2Open(false)
     }
 
     const onFinish = (value: any) => {
-        setIsModalOpen(false)
+        const heroesAttributes = {
+            'Warrior': {
+                strength: value.Warrior_strength,
+                vitality: value.Warrior_vitality,
+                dexterity: value.Warrior_dexterity,
+                intelligence: value.Warrior_intelligence,
+            },
+            'Mage': {
+                strength: value.Mage_strength,
+                vitality: value.Mage_vitality,
+                dexterity: value.Mage_dexterity,
+                intelligence: value.Mage_intelligence,
+            },
+            'Paladin': {
+                strength: value.Paladin_strength,
+                vitality: value.Paladin_vitality,
+                dexterity: value.Paladin_dexterity,
+                intelligence: value.Paladin_intelligence,
+            },
+            'Shaman': {
+                strength: value.Shaman_strength,
+                vitality: value.Shaman_vitality,
+                dexterity: value.Shaman_dexterity,
+                intelligence: value.Shaman_intelligence,
+            },
+            'Rogue': {
+                strength: value.Rogue_strength,
+                vitality: value.Rogue_vitality,
+                dexterity: value.Rogue_dexterity,
+                intelligence: value.Rogue_intelligence,
+            }
+        }
+        try {
+            savePostSetting(yayHeroSettings.restUrl + 'yayhero/v1/settings/level-up-attributes', { heroesAttributes })
+                .then((result) => console.log(result))
+        } catch (error) {
+            console.log(error)
+        }
+        setIsModal2Open(false)
     }
 
     const heroes = yayHeroSettings.levelUpAttributes
+    console.log(heroes.Warrior)
 
     const initialInputsData = [
         {
@@ -46,34 +89,34 @@ function LevelUpAttributesModal() {
     ];
 
     const renderClassInputs = (inputsData: any) => {
-        return inputsData.map((inputData: any) => (
-            <Form.Item style={{ marginBottom: -20 }}>
+        return inputsData.map((inputData: any, index: number) => {
+            return <>
                 <h4>{inputData.name}</h4>
                 {inputData.attributes.map((attribute: any) => (
                     <>
-                        <h5 style={{ marginBottom: 5, textTransform: 'capitalize' }}>{attribute}</h5>
-                        <Input key={attribute} value={inputData.data[attribute]} />
+                        <Form.Item style={{ marginBottom: 10 }} name={`${inputData.name}_${attribute}`} label={attribute}>
+                            <Input value={inputData.data.dexterity} type={'number'} required />
+                        </Form.Item>
                     </>
                 ))}
-                <Divider></Divider>
-            </Form.Item>
-
-        ))
+            </>
+        })
     }
 
     return <div>
         <Modal
             title="Edit"
-            open={isModalOpen}
+            open={isModal2Open}
             cancelButtonProps={{ style: { display: 'none' } }}
             okButtonProps={{ style: { display: 'none' } }}
             onCancel={handleCancel}
         >
             <Form
-                labelCol={{ span: 3 }}
+                labelCol={{ span: 6 }}
                 wrapperCol={{ span: 25 }}
                 labelAlign='right'
                 onFinish={onFinish}
+
             >
                 {renderClassInputs(initialInputsData)}
                 <Form.Item wrapperCol={{ offset: 10, span: 16 }} style={{ marginBottom: 0 }}>

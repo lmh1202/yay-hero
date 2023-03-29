@@ -4,7 +4,7 @@ import { useHeroStore } from "@src/store/heroStore"
 import { Collapse } from "antd"
 
 function DefaultValuesCollapse() {
-    const setIsModalOpen = useHeroStore((state) => state.setIsModalOpen)
+    const setIsModal1Open = useHeroStore((state) => state.setIsModal1Open)
 
     const { Panel } = Collapse
 
@@ -13,7 +13,7 @@ function DefaultValuesCollapse() {
             style={{ fontSize: 18 }}
             onClick={(event) => {
                 event.stopPropagation()
-                setIsModalOpen(true)
+                setIsModal1Open(true)
             }}
         />
     )

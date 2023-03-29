@@ -15,7 +15,7 @@ function LevelUpAttributesCollapse() {
         }
     }
 
-    const setIsModalOpen = useHeroStore((state) => state.setIsModalOpen)
+    const setIsModal2Open = useHeroStore((state) => state.setIsModal2Open)
 
     const { Panel } = Collapse
 
@@ -24,7 +24,7 @@ function LevelUpAttributesCollapse() {
             style={{ fontSize: 18 }}
             onClick={(event) => {
                 event.stopPropagation()
-                setIsModalOpen(true)
+                setIsModal2Open(true)
             }}
         />
     )

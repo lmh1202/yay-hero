@@ -9,7 +9,7 @@ import {
   patchHero,
   postHero,
 } from "@src/api/heroEndpoint";
-import { Settings, yayHeroData } from "../localize";
+import { yayHeroSettings, yayHeroData } from "../localize";
 import { Hero, HeroModel } from "../types/heroes.type";
 
 interface HeroState {
@@ -33,8 +33,13 @@ interface HeroState {
   heroSubmitEdit: (id: number, payload: Hero) => Promise<number>;
   heroDelete: (id: number) => Promise<boolean>;
 
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
+  isModal1Open: boolean;
+
+  isModal2Open: boolean;
+
+  setIsModal1Open: (isOpen: boolean) => void;
+
+  setIsModal2Open: (isOpen: boolean) => void;
   // TODO: settings
   // settings: Settings
   // settingsUpdateDefaultValues(
@@ -63,10 +68,16 @@ export const useHeroStore = create<
         edittingHero: null,
       },
 
-      isModalOpen: false,
+      isModal1Open: false,
 
-      setIsModalOpen: (isOpen: boolean) => {
-        set((state) => { state.isModalOpen = isOpen })
+      isModal2Open: false,
+
+      setIsModal1Open: (isOpen: boolean) => {
+        set((state) => { state.isModal1Open = isOpen })
+      },
+
+      setIsModal2Open: (isOpen: boolean) => {
+        set((state) => { state.isModal2Open = isOpen })
       },
 
       heroRefetch: async () => {

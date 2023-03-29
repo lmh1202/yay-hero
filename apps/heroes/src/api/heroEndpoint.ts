@@ -1,3 +1,4 @@
+import { yayHeroSettings } from "@src/localize";
 import { Hero, HeroModel, Page } from "@src/types/heroes.type";
 import wpEndpoint from "./wpRest";
 
@@ -34,7 +35,7 @@ export async function savePostSetting(url = '', data: any) {
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      "X-WP-Nonce": window.yayHeroSettings.restNonce,
+      "X-WP-Nonce": yayHeroSettings.restNonce,
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",

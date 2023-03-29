@@ -4,9 +4,9 @@ import { useHeroStore } from "@src/store/heroStore";
 import { Button, Form, Input, Modal } from "antd"
 
 function DefaultValuesModal() {
-    const isModalOpen = useHeroStore((state => state.isModalOpen))
+    const isModal1Open = useHeroStore((state => state.isModal1Open))
 
-    const setIsModalOpen = useHeroStore((state => state.setIsModalOpen))
+    const setIsModal1Open = useHeroStore((state => state.setIsModal1Open))
 
     const DEFAULT_VALUE = {
         name: yayHeroSettings.defaultValues.name,
@@ -14,7 +14,7 @@ function DefaultValuesModal() {
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
+        setIsModal1Open(false);
     }
 
     const onFinish = (value: any) => {
@@ -24,14 +24,13 @@ function DefaultValuesModal() {
         } catch (error) {
             console.log(error)
         }
-        setIsModalOpen(false)
+        setIsModal1Open(false)
     }
 
     return <>
         <Modal
-            style={{ top: 20 }}
             title="Settings"
-            open={isModalOpen}
+            open={isModal1Open}
             cancelButtonProps={{ style: { display: 'none' } }}
             okButtonProps={{ style: { display: 'none' } }}
             onCancel={handleCancel}
