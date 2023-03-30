@@ -1,53 +1,72 @@
 import { savePostSetting } from "@src/api/heroEndpoint"
 import { yayHeroSettings } from "@src/localize"
 import { useHeroStore } from "@src/store/heroStore"
-import { Button, Divider, Form, Input, Modal } from "antd"
-import { useState } from "react"
+import { Button, Form, Input, Modal } from "antd"
 
 function LevelUpAttributesModal() {
     const isModal2Open = useHeroStore((state) => state.isModal2Open)
 
     const setIsModal2Open = useHeroStore((state) => state.setIsModal2Open)
 
-    const [defaulvalue, setDefaultValue] = useState({})
+    const buttonId = useHeroStore((state) => state.buttonID)
 
     const handleCancel = () => {
         setIsModal2Open(false)
     }
 
-    const onFinish = (value: any) => {
-        const heroesAttributes = {
-            'Warrior': {
-                strength: value.Warrior_strength,
-                vitality: value.Warrior_vitality,
-                dexterity: value.Warrior_dexterity,
-                intelligence: value.Warrior_intelligence,
-            },
-            'Mage': {
-                strength: value.Mage_strength,
-                vitality: value.Mage_vitality,
-                dexterity: value.Mage_dexterity,
-                intelligence: value.Mage_intelligence,
-            },
-            'Paladin': {
-                strength: value.Paladin_strength,
-                vitality: value.Paladin_vitality,
-                dexterity: value.Paladin_dexterity,
-                intelligence: value.Paladin_intelligence,
-            },
-            'Shaman': {
-                strength: value.Shaman_strength,
-                vitality: value.Shaman_vitality,
-                dexterity: value.Shaman_dexterity,
-                intelligence: value.Shaman_intelligence,
-            },
-            'Rogue': {
-                strength: value.Rogue_strength,
-                vitality: value.Rogue_vitality,
-                dexterity: value.Rogue_dexterity,
-                intelligence: value.Rogue_intelligence,
-            }
+    const onFinish = (value: any, buttonId: string) => {
+        switch (buttonId) {
+            case 'Warrior':
+                value = {
+                    strength: value.Warrior_strength,
+                    dexterity: value.Warrior_dexterity,
+                    intelligence: value.Warrior_intelligence,
+                    vitality: value.Warrior_vitality,
+                }
+                break
+            case 'Paladin':
+                value = {
+                    strength: value.Paladin_strength,
+                    dexterity: value.Paladin_dexterity,
+                    intelligence: value.Paladin_intelligence,
+                    vitality: value.Paladin_vitality,
+                }
+                break
+            case 'Mage':
+                value = {
+                    strength: value.Mage_strength,
+                    dexterity: value.Mage_dexterity,
+                    intelligence: value.Mage_intelligence,
+                    vitality: value.Mage_vitality,
+                }
+                break
+            case 'Shaman':
+                value = {
+                    strength: value.Shaman_strength,
+                    dexterity: value.Shaman_dexterity,
+                    intelligence: value.Shaman_intelligence,
+                    vitality: value.Shaman_vitality,
+                }
+                break
+            case 'Rogue':
+                value = {
+                    strength: value.Rogue_strength,
+                    dexterity: value.Rogue_dexterity,
+                    intelligence: value.Rogue_intelligence,
+                    vitality: value.Rogue_vitality,
+                }
+                break
         }
+
+        const heroesAttributes = {
+            [buttonId]: {
+                strength: value.strength,
+                dexterity: value.dexterity,
+                intelligence: value.intelligence,
+                vitality: value.vitality,
+            },
+        }
+
         try {
             savePostSetting(yayHeroSettings.restUrl + 'yayhero/v1/settings/level-up-attributes', { heroesAttributes })
                 .then((result) => console.log(result))
@@ -58,7 +77,6 @@ function LevelUpAttributesModal() {
     }
 
     const heroes = yayHeroSettings.levelUpAttributes
-    console.log(heroes.Warrior)
 
     const initialInputsData = [
         {
@@ -88,14 +106,20 @@ function LevelUpAttributesModal() {
         },
     ];
 
-    const renderClassInputs = (inputsData: any) => {
-        return inputsData.map((inputData: any, index: number) => {
+    const renderClassInputs = (inputsData: any, buttonID: string) => {
+        const obj_array = inputsData.filter((inputData: any) => inputData.name === buttonID)
+        return obj_array.map((obj: any) => {
             return <>
-                <h4>{inputData.name}</h4>
-                {inputData.attributes.map((attribute: any) => (
+                <h4>{obj.name}</h4>
+                {obj.attributes.map((attribute: any) => (
                     <>
-                        <Form.Item style={{ marginBottom: 10 }} name={`${inputData.name}_${attribute}`} label={attribute}>
-                            <Input value={inputData.data.dexterity} type={'number'} required />
+                        <Form.Item
+                            style={{ marginBottom: 10 }}
+                            name={`${buttonID}_${attribute}`}
+                            label={attribute}
+                            initialValue={obj.data[attribute]}
+                        >
+                            <Input type="number" required />
                         </Form.Item>
                     </>
                 ))}
@@ -112,14 +136,13 @@ function LevelUpAttributesModal() {
             onCancel={handleCancel}
         >
             <Form
-                labelCol={{ span: 6 }}
+                labelCol={{ span: 5 }}
                 wrapperCol={{ span: 25 }}
                 labelAlign='right'
-                onFinish={onFinish}
-
+                onFinish={(value) => onFinish(value, buttonId)}
             >
-                {renderClassInputs(initialInputsData)}
-                <Form.Item wrapperCol={{ offset: 10, span: 16 }} style={{ marginBottom: 0 }}>
+                {renderClassInputs(initialInputsData, buttonId)}
+                <Form.Item wrapperCol={{ offset: 21, span: 16 }} style={{ marginBottom: 0, marginTop: 30 }}>
                     <Button type="primary" htmlType="submit">
                         Save
                     </Button>

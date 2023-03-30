@@ -70,7 +70,7 @@ class YayHeroSettings {
     public function get_level_up_attributes() {
         //TODO
         $data = get_option('yayHeroLevelUpAttributes');
-        if(is_array($data) && empty($data)){
+        if(empty($data)){
             return self::DEFAULT_LEVEL_UP_ATTRIBUTES;
         }
         return $data;

@@ -344,7 +344,8 @@ function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
     }
 
     $yay_hero_settings = yay_hero_settings();
+    $old_data = $yay_hero_settings->get_level_up_attributes();  
+    $data = array_replace_recursive($old_data,$data);
     $yay_hero_settings->set_level_up_attributes($data);
-
     return $data;
 }

@@ -37,9 +37,14 @@ interface HeroState {
 
   isModal2Open: boolean;
 
+  buttonID: string;
+
+  setButtonID: (buttonID: string) => void;
+
   setIsModal1Open: (isOpen: boolean) => void;
 
   setIsModal2Open: (isOpen: boolean) => void;
+
   // TODO: settings
   // settings: Settings
   // settingsUpdateDefaultValues(
@@ -72,12 +77,18 @@ export const useHeroStore = create<
 
       isModal2Open: false,
 
+      buttonID: '',
+
       setIsModal1Open: (isOpen: boolean) => {
         set((state) => { state.isModal1Open = isOpen })
       },
 
       setIsModal2Open: (isOpen: boolean) => {
         set((state) => { state.isModal2Open = isOpen })
+      },
+
+      setButtonID: (buttonID: string) => {
+        set((state) => { state.buttonID = buttonID })
       },
 
       heroRefetch: async () => {
