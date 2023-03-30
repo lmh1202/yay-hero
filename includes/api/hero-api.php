@@ -324,8 +324,8 @@ function yay_hero_update_default_values(WP_REST_Request $request) {
         return $data;
     }
 
-    $yay_hero_settings = yay_hero_settings();
-    $yay_hero_settings->set_default_values($data);
+    $yay_hero_settings_obj = yay_hero_settings();
+    $yay_hero_settings_obj->set_default_values($data);
 
     return $data;
 }
@@ -343,9 +343,9 @@ function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
         return $data;
     }
 
-    $yay_hero_settings = yay_hero_settings();
-    $old_data = $yay_hero_settings->get_level_up_attributes();  
+    $yay_hero_settings_obj = yay_hero_settings();
+    $old_data = $yay_hero_settings_obj->get_level_up_attributes();  
     $data = array_replace_recursive($old_data,$data);
-    $yay_hero_settings->set_level_up_attributes($data);
+    $yay_hero_settings_obj->set_level_up_attributes($data);
     return $data;
 }

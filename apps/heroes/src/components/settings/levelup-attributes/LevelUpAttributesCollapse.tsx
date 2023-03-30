@@ -3,8 +3,6 @@ import { yayHeroSettings } from "@src/localize"
 import { useHeroStore } from "@src/store/heroStore"
 import { HeroClass } from "@src/types/heroes.type";
 import { Button, Collapse, Table } from "antd"
-import { ColumnProps } from "antd/es/table";
-
 
 function LevelUpAttributesCollapse() {
     interface HeroesAttributesType {
@@ -83,16 +81,18 @@ function LevelUpAttributesCollapse() {
         },
     ];
 
-    return <div>
-        <Collapse activeKey={2} style={{ marginTop: 20 }}>
-            <Panel header={'Level Up Attributes'} key={'2'}>
-                <Table
-                    pagination={false}
-                    dataSource={dataTable()}
-                    columns={columns}
-                />
-            </Panel>
-        </Collapse>
-    </div>
+    return (
+        <div>
+            <Collapse activeKey={2} style={{ marginTop: 20 }}>
+                <Panel header={'Level Up Attributes'} key={'2'}>
+                    <Table
+                        pagination={false}
+                        dataSource={dataTable()}
+                        columns={columns}
+                    />
+                </Panel>
+            </Collapse>
+        </div>
+    )
 }
 export default LevelUpAttributesCollapse
