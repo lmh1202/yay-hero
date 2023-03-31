@@ -347,7 +347,7 @@ function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
             'status'=>false,
             'message'=>__('Update level up attributes fail','yayhero'),
         );
-        return $response_obj;
+        return new \WP_REST_Response($response_obj,500) ;
     }
 
     $yay_hero_settings_obj = yay_hero_settings();
@@ -360,12 +360,12 @@ function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
             'status'=> true,
             'message'=> __('Update level up attributes success','yayhero'),
         );
-        return $response_obj;
+        return new \WP_REST_Response($response_obj,200) ;
     }else{
         $response_obj = array(
             'status'=>false,
             'message'=> __('Update level up attributes fail','yayhero'),
         );
-        return $response_obj;
+        return new \WP_REST_Response($response_obj,500) ;
     }
 }
