@@ -56,13 +56,13 @@ class YayHeroSettings {
     
     public function get_default_values() {
         //TODO
-        return get_option('yayHeroDefaultValues', []);
+        return get_option('yayHeroDefaultValues', self::DEFAULT_VALUES);
     }
 
     public function set_default_values($data) {
         //TODO
         if($data){
-            $updateDefaultValues=update_option('yayHeroDefaultValues', $data);
+            $updateDefaultValues = update_option('yayHeroDefaultValues', $data);
         }
         return $updateDefaultValues;  
     }
