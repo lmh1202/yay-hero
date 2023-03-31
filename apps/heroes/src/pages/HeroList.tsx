@@ -12,7 +12,7 @@ import {
 } from "@src/types/heroes.type";
 import { getErrorMessage } from "@src/utils/common";
 import { notifySuccess } from "@src/utils/notification";
-import { Button, Pagination, Popconfirm, Table } from "antd";
+import { Button, Col, Pagination, Popconfirm, Row, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { CSSProperties, useState } from "react";
 import { useQueryClient } from "react-query";
@@ -148,19 +148,25 @@ function HeroList() {
 
   return (
     <div>
-      <header className="yayhero-herolist-title">
-        <h4>Heroes</h4>
-        {yayHeroData.auth.canWrite && (
-          <Link to="/heroes/add">
-            <Button type="primary">Add Heroes</Button>
+      <Row style={{ alignItems: 'center', display: 'flex' }}>
+        <Col span={20}>
+          <h4>Heroes</h4>
+        </Col>
+        <Col span={3} style={{ textAlign: 'right' }}>
+          {yayHeroData.auth.canWrite && (
+            <Link to="/heroes/add">
+              <Button type="primary">Add Heroes</Button>
+            </Link>
+          )}
+        </Col>
+        <Col span={1} style={{ textAlign: 'right' }}>
+          <Link to={'heroes/setting'}>
+            <Button type="primary" shape="circle" style={{ background: 'white' }}>
+              <SettingOutlined style={{ color: 'black' }} />
+            </Button>
           </Link>
-        )}
-        <Link to={'heroes/setting'}>
-          <Button type="primary" shape="circle" style={{ background: 'white' }}>
-            <SettingOutlined style={{ color: 'black' }} />
-          </Button>
-        </Link>
-      </header>
+        </Col>
+      </Row>
 
       <Table
         loading={isLoading || isDeleting}
