@@ -308,44 +308,64 @@ function level_up($hero)
 function yay_hero_update_default_values(WP_REST_Request $request) {
     //TODO
     // yay_hero_settings();
-    $data = '';
-
-    if ($request->get_param('value')){
-        $data = $request->get_param('value');
-    }
-
-
-    if(!$data){
-        $data = 'Server do not get data from request';
-        return $data;
-    }
-
-    if(''===$data['name'] || ''===$data['level']){
-        return $data;
+    $reqs = wp_unslash($request->get_params());
+    $default_values = $reqs['value'];
+  
+    if(!$default_values){
+        $response_obj = array(
+            'status' => false,
+            'message'=>__('Update default values fail','yayhero'),
+        );
+        return new \WP_REST_Response($response_obj,500);
     }
 
     $yay_hero_settings_obj = yay_hero_settings();
-    $yay_hero_settings_obj->set_default_values($data);
-
-    return $data;
+    $succeses = $yay_hero_settings_obj->set_default_values($default_values);
+    
+    if($succeses){
+        $response_obj = array(
+            'status'=>true,
+            'message'=>__('Update default values success','yayhero'),
+        );
+        return new \WP_REST_Response($response_obj,200);
+    }else{
+        $response_obj = array(
+            'status'=>false,
+            'message'=>__('Update default values fail','yayhero'),
+        );
+        return new \WP_REST_Response($response_obj,500);
+    }
 }
 
 function yay_hero_update_level_up_attributes(WP_REST_Request $request) {
     //TODO
-    $data='';
+    $reqs = wp_unslash($request->get_params());
+    $level_up_attributes = $reqs['heroesAttributes'];
 
-    if ($request->get_param('heroesAttributes')){
-        $data = $request->get_param('heroesAttributes');
-    }
-
-    if(!$data){
-        $data = 'Server do not get data from request';
-        return $data;
+    if(!$level_up_attributes){
+        $response_obj = array(
+            'status'=>false,
+            'message'=>__('Update level up attributes fail','yayhero'),
+        );
+        return $response_obj;
     }
 
     $yay_hero_settings_obj = yay_hero_settings();
     $old_data = $yay_hero_settings_obj->get_level_up_attributes();  
-    $data = array_replace_recursive($old_data,$data);
-    $yay_hero_settings_obj->set_level_up_attributes($data);
-    return $data;
+    $level_up_attributes = array_replace_recursive($old_data,$level_up_attributes);
+    $success = $yay_hero_settings_obj->set_level_up_attributes($level_up_attributes);
+    
+    if($success){
+        $response_obj = array(
+            'status'=> true,
+            'message'=> __('Update level up attributes success','yayhero'),
+        );
+        return $response_obj;
+    }else{
+        $response_obj = array(
+            'status'=>false,
+            'message'=> __('Update level up attributes fail','yayhero'),
+        );
+        return $response_obj;
+    }
 }
