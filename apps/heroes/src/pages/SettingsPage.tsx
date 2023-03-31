@@ -21,18 +21,18 @@ function SettingsPage() {
                     <Button type="primary" onClick={() => navigate(-1)} style={{ marginBottom: 10 }}>
                         Back
                     </Button>
-                    {/* DefaultValue */}
+
                     <div id={defaultValuesComponentID}>
                         <DefaultValuesCollapse />
                         <DefaultValuesModal />
                     </div>
 
-                    {/* LevelAttributes */}
                     <div id={levelUpAttributesComponentID}>
                         <LevelUpAttributesCollapse />
                         <LevelUpAttributesModal />
                     </div>
                 </Col>
+
                 <Col span={3}>
                     <SettingsAnchor
                         defaultValuesComponentID={defaultValuesComponentID}

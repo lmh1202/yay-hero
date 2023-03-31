@@ -26,12 +26,9 @@ function LevelUpAttributesCollapse() {
         event.stopPropagation(event)
         setIsModal2Open(true)
         setButtonID(buttonId)
-        // console.log(buttonId)
     }
 
     const heroes = yayHeroSettings.levelUpAttributes
-
-    // console.log(heroes)
 
     const dataTable = () => {
         let dataLeveUpAttribute: HeroesAttributesType[] = []
@@ -90,6 +87,7 @@ function LevelUpAttributesCollapse() {
                         dataSource={dataTable()}
                         columns={columns}
                     />
+                    <div style={{ height: 500 }}></div>
                 </Panel>
             </Collapse>
         </div>
