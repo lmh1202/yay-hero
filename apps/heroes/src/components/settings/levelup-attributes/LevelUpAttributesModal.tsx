@@ -59,6 +59,10 @@ function LevelUpAttributesModal() {
 
     const inputsData = initialInputsData();
 
+    const toUpperCaseAttributeName = (attributes: string) => {
+        return attributes.charAt(0).toUpperCase() + attributes.slice(1);
+    }
+
     const renderClassInputs = (inputsData: any, buttonID: string) => {
         const obj_array = inputsData.filter((inputData: any) => inputData.name === buttonID)
         return obj_array.map((obj: any) => {
@@ -66,17 +70,15 @@ function LevelUpAttributesModal() {
                 <div key={`${obj.name}_attribute`}>
                     <h4 key={`${obj.name}`}>{obj.name}</h4>
                     {obj.attributes.map((attribute: any) => (
-                        <div key={`${attribute}_form`}>
-                            <Form.Item
-                                style={{ marginBottom: 10 }}
-                                name={`${buttonID}_${attribute}`}
-                                label={attribute}
-                                initialValue={obj.data[attribute]}
-                                key={`${attribute}_form_item`}
-                            >
-                                <Input key={`${attribute}_input`} type="number" required />
-                            </Form.Item>
-                        </div>
+                        <Form.Item
+                            key={`${attribute}_form_item`}
+                            name={`${buttonID}_${attribute}`}
+                            style={{ marginBottom: 10 }}
+                            label={toUpperCaseAttributeName(attribute)}
+                            initialValue={obj.data[attribute]}
+                        >
+                            <Input key={`${attribute}_input`} type="number" required />
+                        </Form.Item>
                     ))}
                 </div>
             )
